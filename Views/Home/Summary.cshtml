@@ -1,0 +1,66 @@
+﻿@model Lab_4.Models.AddBtSViewModel
+
+@{
+    ViewData["Title"] = ViewData["MyBooks"];
+    Layout = "~/Views/Home/Authorization_Layout.cshtml";
+}
+
+<div><p>@ViewData["BooksThat"] @Model.Student.LastName @Model.Student.FirstName @ViewData["AlreadyTook"]</p></div>
+<div>
+    <table class="table table-striped table-bordered table-sm">
+        <tr>
+            <th class="text-right">@ViewData["BookName"]</th>
+            <th></th>
+        </tr>
+        @foreach (var book in Model.TakenBooks)
+        {
+            <tr>
+                <td>
+                    @book.Name
+                </td>
+                <td>
+                    <form asp-action="ReturnBook" asp-route-studentId="@Model.Student.UserId" asp-route-bookId="@book.Id" method="post">
+                        <button class="btn btn-primary" type="submit">
+                            @ViewData["Return"]
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div><p>@ViewData["AvailableBooks"]</p></div>
+<div>
+    <table class="table table-striped table-bordered table-sm">
+        <tr>
+            <th class="text-right">@ViewData["BookName"]</th>
+            <th class="text-right">@ViewData["Count"]</th>
+            <th></th>
+        </tr>
+        @foreach (var book in Model.AvailableBooks)
+        {
+            <tr>
+                <td>
+                    @book.Name
+                </td>
+                <td>
+                    @book.AvailableCount / @book.TotalCount
+                </td>
+                <td>
+                    @if (book.IsAvailable)
+                    {
+                        <form asp-action="TakeBook" asp-route-studentId="@Model.Student.UserId" asp-route-bookId="@book.Id" method="post">
+                            <button class="btn btn-primary" type="submit">
+                                @ViewData["Take"]
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        @:Unavailable
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>

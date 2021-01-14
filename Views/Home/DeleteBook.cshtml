@@ -1,0 +1,45 @@
+﻿@model Lab_4.Models.Book
+
+@{
+    ViewData["Title"] = ViewData["Deleting"];
+    Layout = "~/Views/Home/Authorization_Layout.cshtml";
+}
+
+<h1>@ViewData["BookDeleting"]</h1>
+
+<h3>@ViewData["BookDeletingQuest"]</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PageCount)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PageCount)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalCount)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TotalCount)
+        </dd>
+    </dl>
+    
+    <form asp-action="DeleteBook">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="@ViewData["Delete"]" class="btn btn-danger" /> |
+        <a asp-action="Books">@ViewData["BackToBooks"]</a>
+    </form>
+</div>
